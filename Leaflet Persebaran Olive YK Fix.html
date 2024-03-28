@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Persebaran Olive Fried Chicken di Kota Yogyakarta</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        header {
+            background-color: #f70000;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        footer {
+            background-color: #b61111;
+            color: #fff;
+            padding: 10px 20px;
+            text-align: center;
+            width: 100%;
+            z-index: 1; 
+        }
+        #map-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 140px); 
+            position: relative; 
+            z-index: 0; 
+        }
+
+        #map {
+            width: 80%;
+            height: 100%;
+            box-shadow: 0 0 20px rgba(243, 3, 3, 0.1);
+        }
+
+        .restaurant-info {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 4px rgba(255, 0, 0, 0.1);
+        }
+        .restaurant-info h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .restaurant-info p {
+            font-size: 16px;
+            text-align: justify;
+            font-family: 'Fredoka One', cursive;
+        }
+        .restaurant-info img {
+            max-width: 100%;
+            height: auto;
+            margin: 0 auto;
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header style="font-family: 'Chewy', cursive;">
+        <h1>Ayam Goreng Kebanggaan Mahasiswa Jogja!!!</h1>
+    </header>
+
+    <div class="restaurant-info">
+        <h2>Persebaran Gerai Olive Chicken di Kota Yogyakarta</h2>
+        <img src="LogoOlive.png" alt="Olive Fried Chicken Logo">
+        <p>Olive Fried Chicken adalah waralaba restoran cepat saji yang terkenal dengan ayam gorengnya yang lezat. Olive Chicken pertama kali didirikan oleh Kun Sastrawijaya (46) pada tahun 2011. Ia sebelumnya memiliki bisnis fried chicken yang disokong investor, tetapi prinsip bisnis mereka berbeda. Menurut Pak Kun, bisnis harus memberi manfaat kepada orang lain, termasuk mitra dan karyawan, selain menghasilkan keuntungan. Ia memutuskan untuk memberi investor jenama yang ia buat dan membangun jenama baru dengan nama Olive Chicken. Dia tidak peduli, karena dia adalah pendiri dan hanya dia yang tahu cara membuat ayam goreng yang enak.</p>
+        <p>Pak Kun dan istrinya, Bu Aurora sering menghabiskan malam minggu mereka di Kentucky Fried Chicken saat pacaran. Mereka biasanya memesan sepotong ayam untuk dimakan berdua. Bukan karena keinginan romantis, tetapi untuk menghemat uang untuk jajan. Mereka berdua sering makan di tempat tersebut selama tiga tahun. Mereka bahkan meminta pelayan tempat makan untuk mengingat menu yang mereka pesan. Banyak orang mengatakan cita rasanya mirip dengan KFC, mungkin karena mereka sering makan di sana. Pak Kun sendiri menyatakan bahwa produk ayam goreng tepung Olive Chicken dibuat dengan standar yang sama seperti ayam goreng tepung merek asing. Dagang ayam yang digunakan harus benar-benar segar. Itu sebabnya daging ayam Olive Chicken selalu juicy.</p>
+        <p>Olive Chicken memiliki beberapa cabang di Kota Yogyakarta, berdasarkan survei melalui Google Maps dan survei lapangan terdapat 13 gerai cabang. Temukan cabang-cabang gerainya dalam di peta di bawah ini!</p>
+    </div>
+
+    <div id="map-container">
+        <div id="map"></div>
+    </div>
+
+    <div style="margin: 20px auto; max-width: 800px;">
+        <h2 style="text-align: center; font-family: 'Luckiest Guy', cursive; color: #fa0000;">Data Olive Fried Chicken di Kota Yogyakarta</h2>
+        <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+            <tr>
+                <th style="padding: 8px; text-align: center; border-bottom: 1px solid #fa0000; background-color: #fa0000; color: #ffffff;">Nama Cabang</th>
+                <th style="padding: 8px; text-align: center; border-bottom: 1px solid #fa0000; background-color: #fa0000; color: #ffffff;">Alamat</th>
+                <th style="padding: 8px; text-align: center; border-bottom: 1px solid #fa0000; background-color: #fa0000; color: #ffffff;">Koordinat</th>
+            </tr>
+            <tr>
+                <td style="padding: 8px; text-align: center;">Olive Jl. Kyai Mojo</td>
+                <td style="padding: 8px; text-align: center;">Jl. Kyai Mojo, Kembang, Ngestiharjo, Kec. Tegalrejo, Kota Yogyakarta, Daerah Istimewa Yogyakarta</td>
+                <td style="padding: 8px; text-align: center;">-7.779396557506266, 110.35151185146859</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; text-align: center;">Olive Mangkubumi</td>
+                <td style="padding: 8px; text-align: center;"> Gowongan, Jetis, Kota Yogyakarta, Daerah Istimewa Yogyakarta</td>
+                <td style="padding: 8px; text-align: center;">-7.784073772719358, 110.36644639070077</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; text-align: center;">Olive Letjen Suprapto</td>
+                <td style="padding: 8px; text-align: center;">Jl. Letjen Suprapto No.135, Pringgokusuman, Gedong Tengen, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55272</td>
+                <td style="padding: 8px; text-align: center;">-7.7888359745834395, 110.35726250737983</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; text-align: center;">Olive Kemetiran Kidul</td>
+                <td style="padding: 8px; text-align: center;">Jl. Kemetiran Kidul No.3, Pringgokusuman, Gedong Tengen, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55272</td>
+                <td style="padding: 8px; text-align: center;">-7.791642246759942, 110.36121071890096</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; text-align: center;">Olive Bhayangkara</td>
+                <td style="padding: 8px; text-align: center;">Jl. Bhayangkara No.26, Ngupasan, Kec. Gondomanan, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55122</td>
+                <td style="padding: 8px; text-align: center;">-7.797509845983217, 110.36224068712387</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; text-align: center;">Olive Piere Tendean</td>
+                <td style="padding: 8px; text-align: center;">Jl. Kapten Piere Tendean No.34, Wirobrajan, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55252</td>
+                <td style="padding: 8px; text-align: center;">-7.802101822764024, 110.35400094134063</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; text-align: center;">Olive Prawirodirjan</td>
+                <td style="padding: 8px; text-align: center;">Jl. Ibu Ruswo No.66, Prawirodirjan, Kec. Gondomanan, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55131</td>
+                <td style="padding: 8px; text-align: center;">-7.801739773240009, 110.36832068243251</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; text-align: center;">Olive Pugeran</td>
+                <td style="padding: 8px; text-align: center;">Jl. MT. Haryono No.59, Suryodiningratan, Kec. Mantrijeron, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55141</td>
+                <td style="padding: 8px; text-align: center;">-7.812513306134455, 110.35892268471116</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; text-align: center;">Olive Prawirotaman</td>
+                <td style="padding: 8px; text-align: center;">Jl. Parangtritis No.115 A, Brontokusuman, Kec. Mergangsan, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55143</td>
+                <td style="padding: 8px; text-align: center;">-7.820118467309504, 110.37169128566487</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; text-align: center;">Olive Karangkajen</td>
+                <td style="padding: 8px; text-align: center;">Jl. Sisingamangaraja.150 Karangkajen, Brontokusuman, Salakan, Bangunharjo, Kec. Sewon, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55153</td>
+                <td style="padding: 8px; text-align: center;">-7.823211512079988, 110.37147939155776</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; text-align: center;">Olive Jl Taman Siswa</td>
+                <td style="padding: 8px; text-align: center;">Jl. Taman Siswa No.712, Sorosutan, Kec. Umbulharjo, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55151</td>
+                <td style="padding: 8px; text-align: center;">-7.814551460399606, 110.37911234974906</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; text-align: center;">Olive Glagahsari</td>
+                <td style="padding: 8px; text-align: center;">Glagahsari St No.27-33, Warungboto, Umbulharjo, Yogyakarta City, Special Region of Yogyakarta 55164</td>
+                <td style="padding: 8px; text-align: center;">-7.803284355381638, 110.391042815762</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; text-align: center;">Olive Chicken Sapen</td>
+                <td style="padding: 8px; text-align: center;">Jl. Bimo Kurdo No.16, Demangan, Kec. Gondokusuman, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55221</td>
+                <td style="padding: 8px; text-align: center;">-7.785854289901228, 110.3941628328602</td>
+            </tr>
+        </table>
+    </div>
+    
+    <script>
+        var map = L.map('map').setView([-7.801667607331521, 110.37877532365466], 13);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; OpenStreetMap'
+        }).addTo(map);
+
+        function onMapClick(e) {
+            L.popup()
+                .setLatLng(e.latlng)
+                .setContent('Koordinat di sini ' + e.latlng.toString())
+                .openOn(map);
+        }
+
+        map.on('click', onMapClick);
+
+        var ayamgorengoliveIcon = L.icon({
+            iconUrl: 'ayamgorengolive.png',
+            iconSize: [60, 60],
+        });
+
+        var locations = [
+            {coords: [-7.779396557506266, 110.35151185146859], name: 'Olive Fried Chicken', address: 'Jl. Kyai Mojo, Kembang, Ngestiharjo, Kec. Tegalrejo, Kota Yogyakarta, Daerah Istimewa Yogyakarta'},
+            {coords: [-7.784073772719358, 110.36644639070077], name: 'Olive Fried Chicken - Mangkubumi', address: 'Gowongan, Jetis, Kota Yogyakarta, Daerah Istimewa Yogyakarta'},
+            {coords: [-7.7888359745834395, 110.35726250737983], name: 'Olive Fried Chicken', address: 'Jl. Letjen Suprapto No.135, Pringgokusuman, Gedong Tengen, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55272'},
+            {coords: [-7.791642246759942, 110.36121071890096], name: 'Olive Fried Chicken', address: 'Jl. Kemetiran Kidul No.3, Pringgokusuman, Gedong Tengen, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55272'},
+            {coords: [-7.797509845983217, 110.36224068712387], name: 'Olive Fried Chicken', address: 'Jl. Bhayangkara No.26, Ngupasan, Kec. Gondomanan, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55122'},
+            {coords: [-7.802101822764024, 110.35400094134063], name: 'Olive Fried Chicken', address: 'Jl. Kapten Piere Tendean No.34, Wirobrajan, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55252'},
+            {coords: [-7.801739773240009, 110.36832068243251], name: 'Olive Fried Chicken', address: 'Jl. Ibu Ruswo No.66, Prawirodirjan, Kec. Gondomanan, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55131'},
+            {coords: [-7.812513306134455, 110.35892268471116], name: 'Olive Fried Chicken', address: 'Jl. MT. Haryono No.59, Suryodiningratan, Kec. Mantrijeron, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55141'},
+            {coords: [-7.820118467309504, 110.37169128566487], name: 'Olive Fried Chicken', address: 'Jl. Parangtritis No.115 A, Brontokusuman, Kec. Mergangsan, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55143'},
+            {coords: [-7.823211512079988, 110.37147939155776], name: 'Olive Fried Chicken', address: 'Jl. Sisingamangaraja.150 Karangkajen, Brontokusuman, Salakan, Bangunharjo, Kec. Sewon, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55153'},
+            {coords: [-7.814551460399606, 110.37911234974906], name: 'Olive Fried Chicken', address: 'Jl. Taman Siswa No.712, Sorosutan, Kec. Umbulharjo, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55151'},
+            {coords: [-7.803284355381638, 110.391042815762], name: 'Olive Fried Chicken', address: 'Glagahsari St No.27-33, Warungboto, Umbulharjo, Yogyakarta City, Special Region of Yogyakarta 55164'},
+            {coords: [-7.785854289901228, 110.3941628328602], name: 'Olive Fried Chicken', address: 'Jl. Bimo Kurdo No.16, Demangan, Kec. Gondokusuman, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55221'}
+        ];
+
+        locations.forEach(function(location) {
+            L.marker(location.coords, {icon: ayamgorengoliveIcon}).bindPopup('<b>' + location.name + '</b><br>' + location.address).addTo(map);
+        });
+    </script>
+
+</body>
+
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .lucu {
+            background-color: #ffe6e6;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Menu Olive Fried Chicken</h2>
+
+<table>
+    <tr>
+        <th>Paket</th>
+        <th>Harga</th>
+    </tr>
+    <tr class="lucu">
+        <td>Paket Ayam 1 (Nasi+Sayap)</td>
+        <td>Rp19.300</td>
+    </tr>
+    <tr>
+        <td>Paket Ayam 2 (Nasi+Paha Bawah)</td>
+        <td>Rp22.000</td>
+    </tr>
+    <tr class="lucu">
+        <td>Paket Ayam 3 (Nasi+Dada)</td>
+        <td>Rp25.700</td>
+    </tr>
+    <tr>
+        <td>Paket Ayam 4 (Nasi+Dada Lembut)</td>
+        <td>Rp24.500</td>
+    </tr>
+    <tr class="lucu">
+        <td>Paket Ayam 5 (Nasi+Paha Atas)</td>
+        <td>Rp25.700</td>
+    </tr>
+    <tr>
+        <td>Paket Es Teh 1 (Nasi+Sayap+Es Teh)</td>
+        <td>Rp21.100</td>
+    </tr>
+    <tr class="lucu">
+        <td>Paket Es Teh 2 (Nasi+Paha Bawah+Es Teh)</td>
+        <td>Rp24.000</td>
+    </tr>
+    <tr>
+        <td>Paket Es Teh 3 (Nasi+Dada+Es Teh)</td>
+        <td>Rp27.500</td>
+    </tr>
+    <tr class="lucu">
+        <td>Paket Es Teh 4 (Nasi+Dada Lembut+Es Teh)</td>
+        <td>Rp26.500</td>
+    </tr>
+    <tr>
+        <td>Paket Es Teh 5 (Nasi+Paha Atas+Es Teh)</td>
+        <td>Rp27.500</td>
+    </tr>
+    <tr class="lucu">
+        <td>Paket Frestea 1 (Nasi+Sayap+Frestea)</td>
+        <td>Rp11.100</td>
+    </tr>
+    <tr>
+        <td>Paket Frestea 2 (Nasi+Paha Bawah+Frestea)</td>
+        <td>Rp14.000</td>
+    </tr>
+    <tr class="lucu">
+        <td>Paket Frestea 3 (Nasi+Dada+Frestea)</td>
+        <td>Rp17.500</td>
+    </tr>
+    <tr>
+        <td>Paket Frestea 4 (Nasi+Dada Lembut+Frestea)</td>
+        <td>Rp16.250</td>
+    </tr>
+    <tr class="lucu">
+        <td>Paket Frestea 5 (Nasi+Paha Atas+Frestea)</td>
+        <td>Rp17.500</td>
+    </tr>
+    <tr>
+        <td>Paket Taro 1 (Nasi+Sayap+Taro)</td>
+        <td>Rp12.800</td>
+    </tr>
+    <tr class="lucu">
+        <td>Paket Taro 2 (Nasi+Paha Bawah+Taro)</td>
+        <td>Rp15.700</td>
+    </tr>
+    <tr>
+        <td>Paket Taro 3 (Nasi+Dada+Taro)</td>
+        <td>Rp19.200</td>
+    </tr>
+    <tr class="lucu">
+        <td>Paket Taro 4 (Nasi+Dada Lembut+Taro)</td>
+        <td>Rp18.000</td>
+    </tr>
+    <tr>
+        <td>Paket Taro 5 (Nasi+Paha Atas+Taro)</td>
+        <td>Rp19.200</td>
+    </tr>
+    <tr class="lucu">
+        <td>Paket Lakor A (Nasi+Sayap+Paha Bawah)</td>
+        <td>Rp16.900</td>
+    </tr>
+    <tr>
+        <td>Paket Lakor B (Nasi+Sayap+Paha Bawah+Es Teh)</td>
+        <td>Rp19.500</td>
+    </tr>
+    <tr class="lucu">
+        <td>Paket Lakor C (Nasi+Dada+Paha Bawah)</td>
+        <td>Rp23.200</td>
+    </tr>
+    <tr>
+        <td>Paket Lakor D (Nasi+Dada+Paha Bawah+Es Teh)</td>
+        <td>Rp25.500</td>
+    </tr>
+</table>
+<footer>
+    <p>&copy; 2024 Persebaran Olive Fried Chicken di Kota Yogyakarta, by Didan Arisdya A P</p>
+</footer>
+
+</body>
+</html>
+
